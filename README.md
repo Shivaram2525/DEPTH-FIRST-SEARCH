@@ -1,4 +1,9 @@
 # BREADTH-FIRST-SEARCH
+
+```
+Name         : Shivaram M.
+Register No. : 212223040195
+```
 <h1>ExpNo 3 : Implement Breadth First Search Traversal of a Graph</h1> 
 <h3>Name:  </h3>
 <h3>Register Number: </h3>
@@ -68,6 +73,48 @@ Now, Queue becomes empty, So, terminate these process of iteration.
 
 </ol>
 
+## Code
+```
+from collections import deque, defaultdict
+
+def bfs_graph(n, edges):
+    # Create adjacency list
+    graph = defaultdict(list)
+    for u, v in edges:
+        graph[u].append(v)
+        graph[v].append(u)  # Assuming undirected graph
+
+    # Sort adjacency lists to get consistent order
+    for key in graph:
+        graph[key].sort()
+
+    # BFS
+    start = edges[0][0]  # Start from first node in input
+    visited = set()
+    queue = deque([start])
+    order = []
+
+    while queue:
+        node = queue.popleft()
+        if node not in visited:
+            visited.add(node)
+            order.append(node)
+            for neighbor in graph[node]:
+                if neighbor not in visited:
+                    queue.append(neighbor)
+    return order
+
+# Reading input and converting as per your format
+def main():
+    n, m = map(int, input().split())
+    edges = [tuple(input().split()) for _ in range(m)]
+    result = bfs_graph(n, edges)
+    print(result)
+
+if __name__ == "__main__":
+    main()
+
+```
 <hr>
 <h3>Sample Input</h3>
 <hr>
@@ -102,7 +149,11 @@ G F <BR>
 <h3>Sample Output</h3>
 <hr>
 ['0', '1', '2', '3', '4']
-<hr>
+
+## Output
+<img width="1680" height="1050" alt="exp_4(1)" src="https://github.com/user-attachments/assets/8dcaa998-069a-4049-80f6-b409c473407f" />
+<img width="1680" height="1050" alt="exp_4(2)" src="https://github.com/user-attachments/assets/561ebd15-6171-4105-af62-f06a52b8a3da" />
+
 <h3>Result:</h3>
 <hr>
 <p>Thus,a Graph was constructed and implementation of Breadth First Search for the same graph was done successfully.</p>
